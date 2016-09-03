@@ -1,4 +1,4 @@
-#Funimation XBMC Plugin
+#Funimation|NOW XBMC Plugin
 
 An XBMC plugin for streaming videos from funimation.com.
 
@@ -7,6 +7,6 @@ request. Patches and (constructive) input are always welcome.
 
 Todo
 ----
-+ implement a "My Watchlist"
-+ get show icons from different site
-+ context menu for getting show details
++ Add "On Deck" subdirectory to the "My Anime" directory
++ Add optional library sync
++ Add additional video information
