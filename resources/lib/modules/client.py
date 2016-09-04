@@ -33,7 +33,6 @@ from resources.lib.modules import cache
 
 
 def request(url, close=True, redirect=True, error=False, proxy=None, post=None, headers=None, mobile=False, limit=None, referer=None, cookie=None, output='', timeout='30'):
-    #client.request(url, True, True, False, None, headers);
 
     try:
     

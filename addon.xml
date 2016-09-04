@@ -9,10 +9,14 @@
     </extension>
     <extension point="xbmc.addon.metadata">
         <summary lang="en">Funimation|Now - Watch Anime Episodes Streaming Online</summary>
-        <website>http://www.funimation.com</website>
-        <source></source>
+        <website>https://github.com/Protocol-X/plugin.video.funimationnow</website>
+        <source>https://github.com/Protocol-X/plugin.video.funimationnow</source>
         <email></email>
-        <description lang="en">You should be watching anime and Asian drama episodes on FUNimation.com available in English dubs and subtitles.</description>
+        <description lang="en">You should be watching!
+
+Balance out the new with some of our best.
+With FunimationNow, the newest shows are just the beginning. Our library also features a wide variety of classic anime series
+        </description>
         <disclaimer lang="en">Some parts of this addon may not be legal in your country of residence - please check with your local laws before installing.</disclaimer>
         <platform>all</platform>
         <language />

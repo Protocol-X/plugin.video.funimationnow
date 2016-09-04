@@ -39,7 +39,7 @@
     <category label="32261">
         <setting id="loglvl" type="enum" label="32262" lvalues="32263|32264|32265|32266" default="1" />
         <setting type="sep" />
-        <setting label="32267" type="action" action="RunScript($CWD/resources/lib/clear_cookies.py)"/>
+        <setting label="32267" type="action" action="RunPlugin(plugin://plugin.video.funimationnow/?action=clearCookies)"/>
         <setting type="lsep" label="32268" />
         <setting id="provider.afdah" type="bool" label="32269" default="false" />
         <setting type="lsep" label="[CR]" />

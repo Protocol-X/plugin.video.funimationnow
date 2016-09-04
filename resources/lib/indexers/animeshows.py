@@ -185,10 +185,6 @@ class animeshows:
                     utils.sendNotification(32500, 10000);
 
             except Exception as inst:
-                self.logger.error('KEY EXCEPTION');
-                #print(type(inst))    # the exception instance
-                #print(inst.args)     # arguments stored in .args
-                #print(inst)  
                 self.logger.error(inst)
                 pass;
 
@@ -299,8 +295,6 @@ class animeshows:
 
     def browseAll(self, series, action, filtertype):
 
-        self.logger.error('BROWSEALL++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
-
         maxidx = (self.result_count + self.offset);
         paging = False;
 
@@ -342,8 +336,6 @@ class animeshows:
 
     def categories(self, genres, action, filtertype):
 
-        self.logger.error('GENRES++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
-        
         for genre in sorted(genres): 
             
             lurl = str('filtertype=genre&filterx=FilterOption%sOnly&offset=0&limit=3000&ut=%s&genre=%s' % (self.content_type, self.ut, genre));
@@ -356,8 +348,6 @@ class animeshows:
 
 
     def featured(self, series, action, filtertype):
-
-        self.logger.error('FEATURED++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
 
         maxidx = (self.result_count + self.offset);
         paging = False;
@@ -402,8 +392,6 @@ class animeshows:
 
     def firstletter(self, series, action, filtertype):
 
-        self.logger.error('FirstLetter++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
-        
         maxidx = (self.result_count + self.offset);
         paging = False;
 
@@ -447,8 +435,6 @@ class animeshows:
 
     def genre(self, series, action, filtertype):
 
-        self.logger.error('SERIES++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
-
         maxidx = (self.result_count + self.offset);
         paging = False;
 
@@ -491,8 +477,6 @@ class animeshows:
 
     def rating(self, series, action, filtertype):
 
-        self.logger.error('RATING++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
-
         maxidx = (self.result_count + self.offset);
         paging = False;
 
@@ -501,8 +485,6 @@ class animeshows:
             if idx <= maxidx and idx > self.offset:
                 
                 lurl = str('filtertype=series&sort=SortOptionFromBeginning&filterx=FilterOption%sOnly&offset=0&limit=3000&ut=%s&show_id=%s&posterart=%s' % (self.content_type, self.ut, show['asset_id'], self.posterArt(show)));
-
-                self.logger.error(lurl)
 
                 self.list.append({
                     'name': show['series_name'],
@@ -537,8 +519,6 @@ class animeshows:
 
     def getVideoHistory(self, historyresults, action, filtertype):
 
-        self.logger.error('HISTORY++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
-
         lcount = 0;
 
         movies = [];
@@ -554,7 +534,7 @@ class animeshows:
         lcount = sum(len(i) > 0 for i in [movies, extras, episodes]);
 
         if lcount < 1:
-            self.logger.error('send notification of no results');
+            #'send notification of no results'
 
             return self.list;
 
@@ -628,14 +608,10 @@ class animeshows:
 
                 tvdbmeta = utils.checktvdbMeta(self.tvdb_key, self.tvdb_token, self.tvdb_api_url, 'series', None, movies, True) if self.tvdb_token else None;
 
-                self.logger.error('HISTORY MOVIES++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
-
                 return self.episodes([], movies, 'search', tvdbmeta, appendtitle=False, historyresults=True);
 
 
             elif self.season == 'Episode':
-
-                self.logger.error('HISTORY Episodes++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
 
                 tvdbmeta = utils.checktvdbMeta(self.tvdb_key, self.tvdb_token, self.tvdb_api_url, 'series', None, episodes, True) if self.tvdb_token else None;
 
@@ -643,26 +619,15 @@ class animeshows:
 
             else:
 
-                self.logger.error('HISTORY Extras++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
-
                 extras = [d for d in extras if d['video_type'] == self.season.encode('utf-8')];
 
                 tvdbmeta = utils.checktvdbMeta(self.tvdb_key, self.tvdb_token, self.tvdb_api_url, 'series', None, extras, True) if self.tvdb_token else None;
 
                 return self.episodes(extras, [], 'search', tvdbmeta, appendtitle=True, historyresults=True);
 
-        '''movies = [d for d in series if d['video_type'].lower() == 'movie'.encode('utf-8')];
-        series = [d for d in series if d['video_type'].lower() == 'episode'.encode('utf-8')];
-
-        tvdbmeta = utils.checktvdbMeta(self.tvdb_key, self.tvdb_token, self.tvdb_api_url, 'series', None, series, True) if self.tvdb_token else None;
-
-        return self.episodes(series, movies, filtertype, tvdbmeta, appendtitle=True);'''
-
 
     def latestNavigator(self, series, action, filtertype):
 
-        self.logger.error('LATEST++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
-        
         maxidx = (self.result_count + self.offset);
         paging = False;
 
@@ -705,8 +670,6 @@ class animeshows:
 
     def getQueue(self, series, action, filtertype):
 
-        self.logger.error('QUEUE++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
-        
         maxidx = (self.result_count + self.offset);
         paging = False;
 
@@ -751,8 +714,6 @@ class animeshows:
 
     def similarSeries(self, series, action, filtertype):
 
-        self.logger.error('SIMILARSERIES++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
-        
         maxidx = (self.result_count + self.offset);
         paging = False;
         show_id = None;
@@ -797,8 +758,6 @@ class animeshows:
 
     def ratings(self, ratings, action, filtertype):
 
-        self.logger.error('RATINGS++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
-        
         for rating in ratings:
 
             #lurl = str('filtertype=rating&sort=SortOptionFromBeginning&filterx=FilterOption%sOnly&offset=0&limit=3000&ut=%s&rating=%s' % (self.content_type, self.ut, rating)); # DB column error
@@ -835,8 +794,6 @@ class animeshows:
 
     def videos(self, extras, action, filtertype):
 
-        self.logger.error('EXTRAS++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
-
         if self.season is None:
 
             extra_types = [];
@@ -871,8 +828,6 @@ class animeshows:
     
     def search(self, searchresults, action, filtertype):
 
-        self.logger.error('SEARCH++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
-
         lcount = 0;
 
         movies = [];
@@ -891,7 +846,7 @@ class animeshows:
         lcount = sum(len(i) > 0 for i in [movies, extras, episodes, shows]);
 
         if lcount < 1:
-            self.logger.error('send notification of no results');
+            #'send notification of no results'
 
             return self.list;
 
@@ -981,14 +936,10 @@ class animeshows:
 
                 tvdbmeta = utils.checktvdbMeta(self.tvdb_key, self.tvdb_token, self.tvdb_api_url, 'series', None, movies, True) if self.tvdb_token else None;
 
-                self.logger.error('SEARCH MOVIES++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
-
                 return self.episodes([], movies, 'search', tvdbmeta, appendtitle=False, searchresult=True);
 
 
             elif self.season == 'Episode':
-
-                self.logger.error('SEARCH Episodes++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
 
                 tvdbmeta = utils.checktvdbMeta(self.tvdb_key, self.tvdb_token, self.tvdb_api_url, 'series', None, episodes, True) if self.tvdb_token else None;
 
@@ -996,8 +947,6 @@ class animeshows:
 
 
             elif self.season == 'shows':
-
-                self.logger.error('SEARCH SHOWS++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
 
                 maxidx = (self.result_count + self.offset);
                 paging = False;
@@ -1043,8 +992,6 @@ class animeshows:
 
             else:
 
-                self.logger.error('SEARCH Extras++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
-
                 extras = [d for d in extras if d['video_type'] == self.season.encode('utf-8')];
 
                 tvdbmeta = utils.checktvdbMeta(self.tvdb_key, self.tvdb_token, self.tvdb_api_url, 'series', None, extras, True) if self.tvdb_token else None;
@@ -1054,8 +1001,6 @@ class animeshows:
 
     def series(self, series, action, filtertype):
 
-        self.logger.error('SERIES++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
-        
         series = series[action];
 
         movies = [d for d in series if d['video_type'].lower() == 'movie'.encode('utf-8')];
@@ -1079,8 +1024,6 @@ class animeshows:
 
 
     def seasons(self, series, movies, filtertype, tvdbmeta):
-
-        self.logger.error('SEASONS++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
 
         season_set = [];
         movie_set = [];
@@ -1171,9 +1114,6 @@ class animeshows:
 
     def episodes(self, series, movies, filtertype, tvdbmeta, appendtitle=False, searchresult=False, historyresults=False):
 
-        self.logger.error('EPISODES++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
-
-
         maxidx = (self.result_count + self.offset);
         paging = False;
         show_id = None;
@@ -1212,7 +1152,6 @@ class animeshows:
         else:
             video_type = 1;
 
-        self.logger.error(self.currentid);
 
         artwork = utils.getartwork(self.currentid);
 
@@ -1487,8 +1426,6 @@ class animeshows:
 
             if isExtra and not searchresult and not historyresults:
 
-                self.logger.error('EXTRA NO');
-
                 self.list.append({
                     'name': self.nextMenu, 
                     'url': str('filtertype=videos&sort=SortOptionFromBeginning&filterx=FilterOption%sOnly&offset=%s&limit=3000&ut=%s&show_id=%s&season=%s' % (self.content_type, maxidx, self.ut, show_id, self.season)), 
@@ -1500,8 +1437,6 @@ class animeshows:
 
 
             elif isExtra and searchresult:
-
-                self.logger.error('EXTRA Yes');
 
                 lurl = str('filtertype=search&sort=SortOptionFromBeginning&filterx=FilterOption%sOnly&offset=%s&limit=3000&ut=%s&search=%s&season=%s' % (self.content_type, maxidx, self.ut, self.searchstring, self.season));
 
@@ -1517,8 +1452,6 @@ class animeshows:
 
             elif isExtra and historyresults:
 
-                self.logger.error('EXTRA Yes');
-
                 lurl = str('filtertype=getVideoHistory&filterx=FilterOption%sOnly&offset=%s&limit=3000&username=%s&season=%s' % (self.content_type, maxidx, self.uid, self.season));
 
                 self.list.append({
@@ -1533,8 +1466,6 @@ class animeshows:
             
             elif (self.flatten_seasons or self.season is None) and self.season != 'movies' and not searchresult and not historyresults:
 
-                self.logger.error('FLATTEN');
-
                 self.list.append({
                     'name': self.nextMenu, 
                     'url': str('filtertype=series&sort=SortOptionFromBeginning&filterx=FilterOption%sOnly&offset=%s&limit=3000&ut=%s&show_id=%s' % (self.content_type, maxidx, self.ut, show_id)), 
@@ -1546,8 +1477,6 @@ class animeshows:
 
 
             elif searchresult and self.season == 'movies':
-
-                self.logger.error('MOVIES YES');
 
                 lurl = str('filtertype=search&sort=SortOptionFromBeginning&filterx=FilterOption%sOnly&offset=%s&limit=3000&ut=%s&search=%s&season=Movie' % (self.content_type, maxidx, self.ut, self.searchstring));
 
@@ -1563,8 +1492,6 @@ class animeshows:
 
             elif historyresults and self.season == 'movies':
 
-                self.logger.error('MOVIES YES');
-
                 lurl = str('filtertype=getVideoHistory&filterx=FilterOption%sOnly&offset=%s&limit=3000&username=%s&season=Movie' % (self.content_type, maxidx, self.uid));
 
                 self.list.append({
@@ -1578,8 +1505,6 @@ class animeshows:
 
 
             elif searchresult and self.season == 'Episode':
-
-                self.logger.error('EPISODE YES');
 
                 lurl = str('filtertype=search&sort=SortOptionFromBeginning&filterx=FilterOption%sOnly&offset=%s&limit=3000&ut=%s&search=%s&season=Episode' % (self.content_type, maxidx, self.ut, self.searchstring));
 
@@ -1595,8 +1520,6 @@ class animeshows:
 
             elif historyresults and self.season == 'Episode':
 
-                self.logger.error('EPISODE YES');
-
                 lurl = str('filtertype=getVideoHistory&filterx=FilterOption%sOnly&offset=%s&limit=3000&username=%s&season=Episode' % (self.content_type, maxidx, self.uid));
 
                 self.list.append({
@@ -1610,8 +1533,6 @@ class animeshows:
 
 
             else:
-
-                self.logger.error('OTHER');
 
                 self.list.append({
                     'name': self.nextMenu, 
@@ -1647,8 +1568,6 @@ class animeshows:
         if not self.flatten_seasons and season_set:
             self.list.insert(0, {'name': self.allMenu, 'url': str('filtertype=series&sort=SortOptionFromBeginning&filterx=FilterOption%sOnly&offset=0&limit=3000&ut=%s&show_id=%s&season=all' % (self.content_type, self.ut, show_id)), 'image': 'http://ffff', 'action': 'videos', 'isFolder': True, 'checkqueue': False});
 
-        #lurl = str('filtertype=series&sort=SortOptionFromBeginning&filterx=FilterOption%sOnly&offset=0&limit=3000&ut=%s&show_id=%s&season=all' % (self.content_type, self.ut, show_id));
-        
 
     def sortedList(self, itms, name):
 
@@ -1774,10 +1693,6 @@ class animeshows:
     def addDirectory(self, items, queue=False, isFolder=True, imgPath=None):
         import xbmcplugin;
 
-        self.logger.error('+++++++++++++++++ADD DIRECTORY+++++++++++++++++++++')
-        #self.logger.error(url)
-        #self.logger.error('++++++++++++++++++++++++++++++++++++++')
-
         if items == None or len(items) == 0: 
 
             control.idle(); 
@@ -1792,10 +1707,8 @@ class animeshows:
 
         queueMenu = control.lang(32065).encode('utf-8');
 
-        #self.logger.error(sysaddon)
-
         for i in items:
-            #self.logger.error(i)
+
             if 'isFolder' in i:
                 isFolder = i['isFolder'];
 
@@ -1864,7 +1777,6 @@ class animeshows:
 
                 cm.append((control.lang2(19033).encode('utf-8'), 'Action(Info)'));
                 cm.append((control.lang2(10140).encode('utf-8'), 'Addon.OpenSettings(%s)' % control.addonInfo('id')));
-                #xbmcaddon.Addon(id='plugin.program.pneumatic').openSettings()
                 
 
 
@@ -1877,10 +1789,6 @@ class animeshows:
                     item = control.item(label=name);
 
                 item.setArt({'icon': thumb, 'thumb': thumb});
-
-                #import xbmcplugin;
-                #xbmcplugin.setContent(syshandle, 'episodes');
-                #item.setArt({'icon': poster, 'thumb': poster, 'poster': poster, 'tvshow.poster': poster, 'season.poster': poster, 'banner': banner, 'tvshow.banner': banner, 'season.banner': banner})
 
 
                 if isFolder is False:
@@ -1922,8 +1830,6 @@ class animeshows:
                         #"overlay": 7
                         #"watched": True
                         #studio
-                        #item.setProperty('fanart_image', i['fanart']);
-                        #item.setArt({'thumb': thumb, 'banner': i['banner'], 'fanart': i['fanart'], 'poster': i['poster']});
                         item.setArt({'icon': thumb, 'thumb': thumb, 'poster': i['poster'], 'tvshow.poster': i['poster'], 'season.poster': i['poster'], 'banner': i['banner'], 'tvshow.banner': i['banner'], 'season.banner': i['banner'], 'fanart': i['fanart']});
 
                         #http://nullege.com/codes/search/xbmcplugin.SORT_METHOD_EPISODE
@@ -1937,11 +1843,9 @@ class animeshows:
                         #xbmcplugin.addSortMethod(syshandle, xbmcplugin.SORT_METHOD_LABEL) #name
                         #xbmcplugin.addSortMethod(syshandle, xbmcplugin.SORT_METHOD_VIDEO_RATING)
                         #xbmcplugin.addSortMethod(syshandle, xbmcplugin.SORT_METHOD_EPISODE) # Breaks shit
-                        #item.setInfo(type='video', infoLabels={'mpaa': u'TV-14', 'plot': u'North American Branch Chief Renny Epstain pays a visit to Komui to let him know that, by order of the Pope, she is activating the Black Order\u2019s new fighting power, the Third Exorcists. Meanwhile, the last Noah member awakens.', 'aired': u'2016-07-25', 'episode': 107, 'year': u'2016'})
                         
                         item.setInfo(type='video', infoLabels=i['infoLabel'])
 
-                        #url = 'http://wpc.8c48.edgecastcdn.net/038C48/SV/480/MHAJPNWEZd720003/MHAJPNWEZd720003-480-,750,1500,2000,2500,4000,K.mp4.m3u8?CCh6Z_E9uLayF7aeU8rqA8jqGcLBEbTh90q0q3lkKAP4E-QEZI2_3L1n5MaVL919AvnarP79SLZPzoxQmLnnwWSO8J5xHKFnMYnuMJY7TWNBAlsgJUBp__MwoKaiKCdb3jdB_vPt-mbY0jPpKTpRrKZI'
 
                     except Exception as inst:
                         self.logger.error(inst)
@@ -1953,17 +1857,7 @@ class animeshows:
                     cm.append(self.favoritescontext(url, name, isFolder, sysaddon));
                 #item.setInfo(type='Video', infoLabels = meta)
 
-                
-                
-                '''else:
-                    
-                    try:
-                        xbmcplugin.setContent(syshandle, 'tvshows');
-                    except Exception as inst:
-
-                        self.logger.error(inst)
-                        pass;
-                    #Note: content: files, songs, artists, albums, movies, tvshows, episodes, musicvideos'''
+                #Note: content: files, songs, artists, albums, movies, tvshows, episodes, musicvideos'''
 
                 #if not addonFanart == None: 
                     #item.setProperty('Fanart_Image', addonFanart);
@@ -1974,9 +1868,6 @@ class animeshows:
                 control.addItem(handle=syshandle, url=url, listitem=item, isFolder=isFolder);
 
             except Exception as inst:
-                #print(type(inst))    # the exception instance
-                #print(inst.args)     # arguments stored in .args
-                #print(inst)  
                 self.logger.error(inst)
                 pass;
 

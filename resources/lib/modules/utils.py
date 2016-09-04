@@ -63,8 +63,6 @@ def gathermeta(params):
 
     try:
 
-        logger.error(params['barcode'])
-
         season, show_id, asset_id, duration, progress, number = params['barcode'].split('-');
         content = params['video'];
         continueplayback = 1;
@@ -208,18 +206,11 @@ def collectdata(season, show_id, asset_id, number, content):
                 
                 aired = show['releaseDate'] if 'releaseDate' in show else None;
 
-                logger.error(aired)
-                logger.error('1')
-
                 if aired is None:
                     aired = show['pubDate'] if 'pubDate' in show else None;
-                    logger.error(aired)
-                    logger.error('2')
 
             except:
                 aired = None;
-                logger.error(aired)
-                logger.error('3')
 
                 pass;
 
@@ -252,12 +243,7 @@ def collectdata(season, show_id, asset_id, number, content):
                                     plot = overview;
 
 
-                            logger.error(aired)
-                            logger.error('4')
-
-
                     except Exception as inst:
-                        logger.error('TVDBMETA ERROR');
                         logger.error(inst);
                         
                         pass;
@@ -278,8 +264,6 @@ def collectdata(season, show_id, asset_id, number, content):
 
                 name = '%s (%s)' % (name, year);
 
-            logger.error(aired)
-            logger.error('5')
 
             if aired is not None:
             
@@ -290,18 +274,12 @@ def collectdata(season, show_id, asset_id, number, content):
 
                     aired = parser.parse(aired, dayfirst=False);
 
-                    logger.error(aired)
-                    logger.error('6')
-
                     year = aired.strftime('%Y');
                     premaired = aired.strftime('%d/%m/%Y');
                     aired = aired.strftime('%d/%m/%Y');
 
-                    logger.error(aired)
-                    logger.error('7')
 
                 except Exception as inst:
-                    logger.error('AIRED ERROR');
                     logger.error(inst);
                 
                     pass;
@@ -360,7 +338,6 @@ def collectdata(season, show_id, asset_id, number, content):
                         poster = 'http://thetvdb.com/banners/%s' % posters[randint(0, (len(posters) - 1))]['fileName'];
 
                 except Exception as inst:
-                    logger.error('ARTWORK ERROR');
                     logger.error(inst);
                 
                     pass;
@@ -393,7 +370,6 @@ def collectdata(season, show_id, asset_id, number, content):
                 #'fanart': ,
             }
 
-            #logger.error(infoLabels)
 
             showinfo = {
                 'year': year,
@@ -414,7 +390,7 @@ def collectdata(season, show_id, asset_id, number, content):
 
         else:
 
-            sendNotification('No match found.  Please ensure you are logged in.', 10000);
+            sendNotification(32505, 10000);
 
     except Exception as inst:
 
@@ -539,8 +515,6 @@ def markwatchedstatus(params):
 def syncdbprogress(show_id, asset_id, content, currentTime, totalTime, webupdate, overlay, supress=True):
     import syncdata;
 
-    logger.error(asset_id)
-
     watched = 1 if overlay == '7' else 0;
     trakt_progress = 0.0;
 
@@ -639,10 +613,10 @@ def setfnstatus(show_id, asset_id, progress, watched, supress):
                 if not supress:
 
                     if watched > 0:
-                        sendNotification('There was an error marking video as watched', 5000);
+                        sendNotification(32503, 5000);
 
                     else: 
-                        sendNotification('There was an error marking video as unwatched', 5000);
+                        sendNotification(32504, 5000);
 
                 return None;
 
@@ -655,10 +629,10 @@ def setfnstatus(show_id, asset_id, progress, watched, supress):
         if not supress:
 
             if watched > 0:
-                    sendNotification('There was an error marking video as watched', 5000);
+                    sendNotification(32503, 5000);
 
             else: 
-                sendNotification('There was an error marking video as unwatched', 5000);
+                sendNotification(32504, 5000);
 
         return None;
         
@@ -759,8 +733,6 @@ def checkcookie():
 
                 if result is not None:
 
-                    logger.error(result)
-
                     if len(result) == 2:
 
                         result = json.loads(result[1]);
@@ -827,6 +799,16 @@ def checkcookie():
 
     else:
         resetsettings();
+
+
+def clearcookies():
+    import cookiecache;
+
+    if cookiecache.clearcookies():
+        sendNotification(32753, 5000);
+
+    else:
+        sendNotification(32754, 5000);
 
 
 def gettvdbToken(apikey, url):
@@ -923,8 +905,6 @@ def gettvdbToken(apikey, url):
 
 
 def checktvdbMeta(apikey, token, url, view, criteria, funshows, skipchecks=False):
-
-    logger.error('META CHECK')
 
     try:
 
@@ -1469,6 +1449,8 @@ def favorites():
 def updatefavorites(params):
     import json;
 
+    from resources.lib.modules import control;
+
     url = None;
     title = None;
     thumbnail = None;
@@ -1517,7 +1499,7 @@ def updatefavorites(params):
             favs = json.loads(favs);
 
             if 'result' in favs and favs['result'] != 'OK':
-                sendNotification('There was an error updating your favorites. Please try again.', 5000);
+                sendNotification(32506, 5000);
 
             else:
                 control.refresh();
@@ -1525,7 +1507,7 @@ def updatefavorites(params):
 
     except Exception as inst:
         logger.error(inst);
-        sendNotification('There was an error updating your favorites. Please try again.', 5000);
+        sendNotification(32506, 5000);
 
         pass;
 
@@ -1651,7 +1633,7 @@ def promptForLogin(prompt=None):
     __settings__ = xbmcaddon.Addon(control.addonInfo('id'))
 
     if prompt:
-        if xbmcgui.Dialog().yesno('Login Failed', 'Invalid username/password', 'Edit now?'): # prompt if user wants to set it
+        if xbmcgui.Dialog().yesno(control.lang(32755).encode('utf-8'), control.lang(32756).encode('utf-8'), control.lang(32757).encode('utf-8')):
             __settings__.openSettings();
 
     else:

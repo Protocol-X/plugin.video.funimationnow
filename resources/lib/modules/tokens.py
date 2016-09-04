@@ -60,8 +60,7 @@ def fetchtvdbtoken():
             return None;
 
     except Exception as inst:
-        logger.error(inst);
-
+        #logger.error(inst);
         return None;
 
 
@@ -90,8 +89,7 @@ def inserttvdbtoken(token, edate, rdate):
 
         except Exception as inst:
 
-            logger.error(inst);
-
+            #logger.error(inst);
             pass;
 
         
@@ -103,8 +101,7 @@ def inserttvdbtoken(token, edate, rdate):
 
         except Exception as inst:
 
-            logger.error(inst);
-
+            #logger.error(inst);
             pass;
 
 
@@ -117,7 +114,6 @@ def inserttvdbtoken(token, edate, rdate):
 
     except Exception as inst:
 
-        logger.error(inst);
-
+        #logger.error(inst);
         return False;
 

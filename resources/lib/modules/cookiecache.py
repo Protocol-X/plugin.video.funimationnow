@@ -71,11 +71,7 @@ def fetch(uid, idx = None):
 
 def insert(uid, rctext, fninfo):
     
-    logger.debug('Attempting to update cookie DB.');
-    
     try:
-
-        logger.debug('Validating DB file exists.');
 
         control.makeFile(control.dataPath);
 
@@ -126,3 +122,23 @@ def insert(uid, rctext, fninfo):
 
         return False;
 
+
+def clearcookies():
+
+    try: 
+
+        control.makeFile(control.dataPath);
+
+        dbcon = database.connect(control.cookiesFile);
+        dbcur = dbcon.cursor();
+
+        #dbcur.execute("DELETE FROM cookies"); #Not working for some reason.  Unclear to why since there are no errors
+        dbcur.execute("DROP TABLE cookies");
+
+        return True;
+
+    except Exception as inst:
+
+        logger.error(inst);
+
+        return False;

@@ -52,31 +52,9 @@ logger = setup_logging();
 params = dict(urlparse.parse_qsl(sys.argv[2].replace('?','')));
 
 action = params.get('action');
-name = params.get('name');
-title = params.get('title');
-year = params.get('year');
-imdb = params.get('imdb');
-tvdb = params.get('tvdb');
-season = params.get('season');
-episode = params.get('episode');
-tvshowtitle = params.get('tvshowtitle');
-premiered = params.get('premiered');
 url = params.get('url');
-image = params.get('image');
-meta = params.get('meta');
-select = params.get('select');
-query = params.get('query');
-source = params.get('source');
 content = params.get('content');
 filtertype = params.get('filtertype');
-
-'''
-logger.error('------------------------------------------------------------------')
-logger.error(action)
-logger.error('++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++')
-logger.error(params)
-logger.error('------------------------------------------------------------------')
-'''
 
 
 if action == None:
@@ -154,7 +132,7 @@ elif action == 'updatemyqueue':
     from resources.lib.modules import utils;
 
     success = utils.addremovequeueitem(params);
-    emessage = 'There was an error making your request.  Please try again.';
+    emessage = 32507;
 
     if success is not None:
 
@@ -216,3 +194,12 @@ elif action == 'loginNavigator':
 
     utils.promptForLogin();
     utils.checkcookie();
+
+elif action == 'clearCookies':
+    import xbmcgui;
+    from resources.lib.modules import control;
+    from resources.lib.modules import utils;
+
+    if xbmcgui.Dialog().yesno(control.lang(32750).encode('utf-8'), control.lang(32751).encode('utf-8'), control.lang(32752).encode('utf-8')):
+        utils.clearcookies();
+

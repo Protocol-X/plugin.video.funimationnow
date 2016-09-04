@@ -67,7 +67,7 @@ def fetchupdated(showid):
 
 
     except Exception as inst:
-        logger.error(inst);
+        #logger.error(inst);
 
         return None;
 
@@ -103,7 +103,7 @@ def fetchepisodecount(showid):
 
 
     except Exception as inst:
-        logger.error(inst);
+        #logger.error(inst);
 
         return 0;
 
@@ -139,7 +139,7 @@ def fetchartwork(showid):
 
 
     except Exception as inst:
-        logger.error(inst);
+        #logger.error(inst);
 
         return None;
 
@@ -175,7 +175,7 @@ def fetchshowname(showid):
 
 
     except Exception as inst:
-        logger.error(inst);
+        #logger.error(inst);
 
         return None;
 
@@ -284,7 +284,7 @@ def fetchshowstatus(showid):
         return statusmeta;
 
     except Exception as inst:
-        logger.error(inst);
+        #logger.error(inst);
 
         return None;
 
@@ -338,7 +338,7 @@ def fetchepisodes(shows, assets):
 
 
     except Exception as inst:
-        logger.error(inst);
+        #logger.error(inst);
 
         return None;
 
@@ -368,7 +368,7 @@ def inserttvdbtoken(token, edate, rdate):
 
         except Exception as inst:
 
-            logger.error(inst);
+            #logger.error(inst);
 
             pass;
 
@@ -381,7 +381,7 @@ def inserttvdbtoken(token, edate, rdate):
 
         except Exception as inst:
 
-            logger.error(inst);
+            #logger.error(inst);
 
             pass;
 
@@ -395,7 +395,7 @@ def inserttvdbtoken(token, edate, rdate):
 
     except Exception as inst:
 
-        logger.error(inst);
+        #logger.error(inst);
 
         return False;
 
@@ -416,14 +416,14 @@ def insertfnmetacheck(showid, rdate):
                 dbcur.execute("DELETE FROM fn_meta_check WHERE show_id = %s" % showid);
 
             except Exception as inst:
-                logger.error(inst);
+                #logger.error(inst);
 
                 pass;
 
             dbcur.execute("INSERT INTO fn_meta_check Values (?, ?)", (showid, rdate));
 
         except Exception as inst:
-            logger.error(inst);
+            #logger.error(inst);
 
             pass;
 
@@ -444,7 +444,7 @@ def fetchfnmetacheck(showid):
         dbcur.execute("CREATE TABLE IF NOT EXISTS fn_meta_check (""show_id TEXT, ""lastupdated TEXT, ""UNIQUE(show_id)"");");
 
     except Exception as inst:
-        logger.error(inst);
+        #logger.error(inst);
         return None;
 
     try:
@@ -468,7 +468,7 @@ def fetchfnmetacheck(showid):
 
 
     except Exception as inst:
-        logger.error(inst);
+        #logger.error(inst);
 
         return None;
 
@@ -489,14 +489,14 @@ def insertfnhistorycheck(showid, rdate):
                 dbcur.execute("DELETE FROM fn_history_check WHERE show_id = %s" % showid);
 
             except Exception as inst:
-                logger.error(inst);
+                #logger.error(inst);
 
                 pass;
 
             dbcur.execute("INSERT INTO fn_history_check Values (?, ?)", (showid, rdate));
 
         except Exception as inst:
-            logger.error(inst);
+            #logger.error(inst);
 
             pass;
 
@@ -517,7 +517,7 @@ def fetchfnhistorycheck(showid):
         dbcur.execute("CREATE TABLE IF NOT EXISTS fn_history_check (""show_id TEXT, ""lastupdated TEXT, ""UNIQUE(show_id)"");");
 
     except Exception as inst:
-        logger.error(inst);
+        #logger.error(inst);
         return None;
 
     try:
@@ -541,7 +541,7 @@ def fetchfnhistorycheck(showid):
 
 
     except Exception as inst:
-        logger.error(inst);
+        #logger.error(inst);
 
         return None;
 
@@ -562,14 +562,14 @@ def inserttraktwatchedcheck(showid, rdate):
                 dbcur.execute("DELETE FROM trakt_watched_check WHERE show_id = %s" % showid);
 
             except Exception as inst:
-                logger.error(inst);
+                #logger.error(inst);
 
                 pass;
 
             dbcur.execute("INSERT INTO trakt_watched_check Values (?, ?)", (showid, rdate));
 
         except Exception as inst:
-            logger.error(inst);
+            #logger.error(inst);
 
             pass;
 
@@ -590,7 +590,7 @@ def fetchtraktwatchedcheck(showid):
         dbcur.execute("CREATE TABLE IF NOT EXISTS trakt_watched_check (""show_id TEXT, ""lastupdated TEXT, ""UNIQUE(show_id)"");");
 
     except Exception as inst:
-        logger.error(inst);
+        #logger.error(inst);
         return None;
 
     try:
@@ -606,7 +606,6 @@ def fetchtraktwatchedcheck(showid):
         match = dbcur.fetchall();
         
         if match is not None:
-            logger.error(match);
             return match[0][0];
 
         else:
@@ -614,7 +613,7 @@ def fetchtraktwatchedcheck(showid):
 
 
     except Exception as inst:
-        logger.error(inst);
+        #logger.error(inst);
 
         return None;
 
@@ -635,7 +634,7 @@ def inserttvdbseries(meta):
                 dbcur.execute("DELETE FROM tvdb_series_info WHERE (show_id = '%s' and tvdbid = '%s')" % (meta['show_id'], meta['tvdbid']));
 
             except Exception as inst:
-                logger.error(inst);
+                #logger.error(inst);
 
                 pass;
 
@@ -644,7 +643,7 @@ def inserttvdbseries(meta):
             #dbcur.execute("INSERT INTO tvdb_series_info Values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", meta.values()); #We like this idea but the values seem to have random placement due to restrictions on the dictionary
 
         except Exception as inst:
-            logger.error(inst);
+            #logger.error(inst);
 
             pass;
 
@@ -670,7 +669,7 @@ def inserttvdbepisodes(meta):
             dbcur.execute("DELETE FROM tvdb_episode_info WHERE (show_id = '%s' and tvdbid = '%s')" % (meta[0]['show_id'], meta[0]['tvdbid']));
 
         except Exception as inst:
-            logger.error(inst);
+            #logger.error(inst);
 
             pass;
 
@@ -682,7 +681,7 @@ def inserttvdbepisodes(meta):
                 dbcur.execute("INSERT INTO tvdb_episode_info Values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", (m['show_id'], m['episode_id'], m['tvdbid'], m['tvdbeid'], m['overview'], m['description'], m['absoluteNumber'], m['airedSeason'], m['airedEpisodeNumber'], m['firstAired'], m['episodeName'], m['sorttitle'], m['url'], m['videotype'], m['watched'], m['progress']));
 
             except Exception as inst:
-                logger.error(inst);
+                #logger.error(inst);
 
                 pass;
 
@@ -710,14 +709,14 @@ def updatefnqueue(meta, queuestate=0):
                 dbcur.execute("UPDATE fn_queue_info SET inqueue = %s WHERE asset_id = %s" % (queuestate, m['asset_id']));
 
             except Exception as inst:
-                logger.error(inst);
+                #logger.error(inst);
 
                 pass;
 
         dbcon.commit();
 
     except Exception as inst:
-        logger.error(inst);
+        #logger.error(inst);
 
         return None;
 
@@ -741,7 +740,7 @@ def addremovefnqueue(meta):
             dbcur.execute("UPDATE fn_queue_info SET inqueue = %s WHERE asset_id = %s" % (meta['state'], meta['asset_id']));
 
         except Exception as inst:
-            logger.error(inst);
+            #logger.error(inst);
 
             pass;
 
@@ -754,7 +753,7 @@ def addremovefnqueue(meta):
             return (True, "%s removed from your anime queue successfully!" % meta['series_name']);
 
     except Exception as inst:
-        logger.error(inst);
+        #logger.error(inst);
 
         if int(meta['state']) > 0:
             return (False, "There was an error adding %s to your anime queue." % meta['series_name']);
@@ -863,7 +862,7 @@ def insertfnepisodes(meta, itype):
                     dbcur.execute("INSERT OR REPLACE INTO fn_episode_info (show_id, asset_id, video_type) VALUES", (m['show_id'], m['asset_id'], m['video_type']));'''
 
             except Exception as inst:
-                logger.error(inst);
+                #logger.error(inst);
 
                 pass;
 
@@ -872,7 +871,7 @@ def insertfnepisodes(meta, itype):
         #we probably want to add some user notification for failures
 
     except Exception as inst:
-        logger.error(inst);
+        #logger.error(inst);
 
         return None;
 
@@ -892,7 +891,7 @@ def synctraktprogress(meta, rdate):
             dbcur.execute("DELETE FROM trakt_progress_info");
 
         except Exception as inst:
-            logger.error(inst);
+            #logger.error(inst);
 
             pass;
 
@@ -903,14 +902,14 @@ def synctraktprogress(meta, rdate):
                 dbcur.execute("INSERT INTO trakt_progress_info Values (?, ?, ?, ?, ?, ?, ?, ?)", (m['show']['ids']['trakt'], m['episode']['ids']['trakt'], m['show']['ids']['tvdb'], m['episode']['ids']['tvdb'], m['episode']['season'], m['episode']['number'], m['progress'], rdate));
 
             except Exception as inst:
-                logger.error(inst);
+                #logger.error(inst);
 
                 pass;
 
         dbcon.commit();
 
     except Exception as inst:
-        logger.error(inst);
+        #logger.error(inst);
 
         return None;
 
@@ -947,7 +946,7 @@ def fetchtraktprogresslastupdated():
 
 
     except Exception as inst:
-        logger.error(inst);
+        #logger.error(inst);
 
         return None;
 
@@ -963,7 +962,7 @@ def fetchtraktupdateinfo(show_id, asset_id):
         dbcur.execute("CREATE TABLE IF NOT EXISTS tvdb_episode_info (""show_id TEXT, ""episode_id TEXT, ""tvdbid TEXT, ""tvdbeid TEXT, ""overview TEXT, ""description TEXT, ""absoluteNumber TEXT, ""airedSeason TEXT, ""airedEpisodeNumber TEXT, ""firstAired TEXT, ""tvdbtitle TEXT, ""sorttitle TEXT, ""url TEXT, ""videotype TEXT, ""warched TEXT, ""progress TEXT, ""UNIQUE(show_id, episode_id, tvdbid, tvdbeid)"");");
 
     except Exception as inst:
-        logger.error(inst);
+        #logger.error(inst);
         return None;
 
     try:
@@ -982,7 +981,6 @@ def fetchtraktupdateinfo(show_id, asset_id):
         match = dbcur.fetchall();
         
         if match is not None:
-            logger.error(match);
             return match[0];
 
         else:
@@ -990,7 +988,7 @@ def fetchtraktupdateinfo(show_id, asset_id):
 
 
     except Exception as inst:
-        logger.error(inst);
+        #logger.error(inst);
 
         return None;
 
@@ -1007,7 +1005,7 @@ def fetchtraktprogressinfo(show_id, asset_id):
         dbcur.execute("CREATE TABLE IF NOT EXISTS tvdb_series_info (""show_id TEXT, ""tvdbid TEXT, ""imdbid TEXT, ""seriesid TEXT, ""traktid TEXT, ""lastUpdated TEXT, ""seriesName TEXT, ""status TEXT, ""firstAired TEXT, ""firstEpisode TEXT, ""genre TEXT, ""network TEXT, ""siteRating TEXT, ""siteRatingCount TEXT, ""images TEXT, ""UNIQUE(show_id, tvdbid)"");");
 
     except Exception as inst:
-        logger.error(inst);
+        #logger.error(inst);
         return None;
 
     try:
@@ -1027,7 +1025,6 @@ def fetchtraktprogressinfo(show_id, asset_id):
         match = dbcur.fetchall();
         
         if match is not None:
-            logger.error(match);
             return match[0];
 
         else:
@@ -1035,6 +1032,6 @@ def fetchtraktprogressinfo(show_id, asset_id):
 
 
     except Exception as inst:
-        logger.error(inst);
+        #logger.error(inst);
 
         return None;
