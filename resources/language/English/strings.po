@@ -316,6 +316,26 @@ msgctxt "#32502"
 msgid "Remote network issues detected. Please try again.  If the issue continues please try at a later time."
 msgstr ""
 
+msgctxt "#32503"
+msgid "There was an error marking video as watched."
+msgstr ""
+
+msgctxt "#32504"
+msgid "There was an error marking video as unwatched."
+msgstr ""
+
+msgctxt "#32505"
+msgid "No match found.  Please ensure you are logged in."
+msgstr ""
+
+msgctxt "#32506"
+msgid "There was an error updating your favorites. Please try again."
+msgstr ""
+
+msgctxt "#32507"
+msgid "'There was an error making your request.  Please try again.'"
+msgstr ""
+
 
 # Default Values [32600 - 32699]
 --------------------------------
@@ -362,4 +382,40 @@ msgstr ""
 
 msgctxt "#32726"
 msgid "[COLOR purple]A[/COLOR]nime [COLOR purple]S[/COLOR]earch"
+msgstr ""
+
+
+# Dialogue Values [32750 - 32849]
+-------------------------------
+
+msgctxt "#32750"
+msgid "Clear Cookies?"
+msgstr ""
+
+msgctxt "#32751"
+msgid "Clearing cookies could correct content visibility issues."
+msgstr ""
+
+msgctxt "#32752"
+msgid "Continue?"
+msgstr ""
+
+msgctxt "#32753"
+msgid "Cookie cleared successfully"
+msgstr ""
+
+msgctxt "#32754"
+msgid "Failed to clear cookies"
+msgstr ""
+
+msgctxt "#32755"
+msgid "Login Failed"
+msgstr ""
+
+msgctxt "#32756"
+msgid "Invalid username/password"
+msgstr ""
+
+msgctxt "#32757"
+msgid "Edit now?"
 msgstr ""

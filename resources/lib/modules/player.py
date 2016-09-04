@@ -128,8 +128,6 @@ class player(xbmc.Player):
 
             xbmc.sleep(1000);
 
-        logger.error(overlay)
-
 
         if overlay == '7':
 
